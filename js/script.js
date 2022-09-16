@@ -6,21 +6,10 @@ const input = form.elements[0];
 const errorMessage = document.createElement('div');
 
 form.addEventListener('submit', handleSubmit);
-input.addEventListener('focus', handleFocus);
-ul.addEventListener('click', handleClick);
+input.addEventListener('focus', removeError);
+ul.addEventListener('click', removeToDo);
 
-
-function handleSubmit(event) {
-    event.preventDefault();
-
-    if (input.value.trim() === "") {
-        input.classList.add('error');
-        errorMessage.classList.add('error-message');
-        errorMessage.innerHTML = 'Please, enter a valid task';
-        form.append(errorMessage);
-        return;
-    }
-    
+function addToDo (){
     const li = document.createElement('li');
     li.innerHTML = input.value;
     li.classList.add('task');
@@ -34,14 +23,26 @@ function handleSubmit(event) {
     li.append(delBtn);
 }
 
-function handleFocus() {
+function handleSubmit(event) {
+    event.preventDefault();
+    if (input.value.trim() === "") {
+        input.classList.add('error');
+        errorMessage.classList.add('error-message');
+        errorMessage.innerHTML = 'Please, enter a valid task';
+        form.append(errorMessage);
+        return;
+    }
+    addToDo();
+}
+
+function removeError() {
      if (input.classList.contains('error')) {
          input.classList.remove('error');
          errorMessage.innerHTML = '';
     }
 }
 
-function handleClick (event) {
+function removeToDo (event) {
     let isRemoveButton = event.target.className === 'del-button';
     if (isRemoveButton){
     let li = event.target.closest('.task');
