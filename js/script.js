@@ -1,8 +1,8 @@
 "use strict"
 
 const ul = document.getElementById('list');
-const form = document.forms[0];
-const input = form.elements[0];
+const form = document.forms['task-form'];
+const { input} = form;
 const errorMessage = document.createElement('div');
 
 form.addEventListener('submit', handleSubmit);
